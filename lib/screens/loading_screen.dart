@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 
 class LoadingScreen extends StatefulWidget {
   @override
@@ -17,7 +17,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
     print("location $location");
     final url = Uri.parse(
         "https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$appID");
-    final response = await get(url);
+    final response = await http.get(url);
     print("response ${response.body}");
   }
 

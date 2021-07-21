@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:clima/services/weather.dart';
 import 'package:clima/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -72,7 +73,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       style: kTempTextStyle,
                     ),
                     Text(
-                      '☀️',
+                      WeatherModel.getWeatherIcon(condition),
                       style: kConditionTextStyle,
                     ),
                   ],
@@ -81,7 +82,7 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: EdgeInsets.only(right: 15.0),
                 child: Text(
-                  "It's 🍦 time in San Francisco!",
+                  "${WeatherModel.getMessage(temperature)} in $city!",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),

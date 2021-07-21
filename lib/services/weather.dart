@@ -54,11 +54,22 @@ class WeatherModel {
       return null;
     }
     // load weather
+    final url = "https://api.openweathermap.org/data/2.5/weather?"
+        "lat=${position.latitude}&lon=${position.longitude}"
+        "&appid=$appID&units=metric";
+    return callAPI(context, url);
+  }
+
+  static Future<String> getWeatherThere(
+      BuildContext context, String city) async {
+    final url = "https://api.openweathermap.org/data/2.5/weather?"
+        "q=$city&appid=$appID&units=metric";
+    return callAPI(context, url);
+  }
+
+  static Future<String> callAPI(BuildContext context, String url) async {
     try {
-      final url = Uri.parse("https://api.openweathermap.org/data/2.5/weather?"
-          "lat=${position.latitude}&lon=${position.longitude}"
-          "&appid=$appID&units=metric");
-      final response = await http.get(url);
+      final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
         return response.body;
       } else {
@@ -69,6 +80,7 @@ class WeatherModel {
       print(e);
       showErrorDialog(context, "Can't load weather data", e);
     }
+    return "";
   }
 
   static void showErrorDialog(BuildContext context, String title, Exception e) {

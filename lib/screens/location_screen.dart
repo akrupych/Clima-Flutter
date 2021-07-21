@@ -21,10 +21,16 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   void initState() {
     super.initState();
-    final data = jsonDecode(widget.weatherJson);
-    condition = data['weather'][0]['id'];
-    temperature = data['main']['temp'].toInt();
-    city = data['name'];
+    updateUI(widget.weatherJson);
+  }
+
+  void updateUI(String weatherJson) {
+    setState(() {
+      final data = jsonDecode(weatherJson);
+      condition = data['weather'][0]['id'];
+      temperature = data['main']['temp'].toInt();
+      city = data['name'];
+    });
   }
 
   @override
@@ -49,7 +55,9 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      updateUI(await WeatherModel.getWeatherHere(context));
+                    },
                     child: Icon(
                       Icons.near_me,
                       size: 50.0,

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:clima/utilities/constants.dart';
+import 'package:flutter/material.dart';
 
 class CityScreen extends StatefulWidget {
   @override
@@ -33,7 +33,23 @@ class _CityScreenState extends State<CityScreen> {
               ),
               Container(
                 padding: EdgeInsets.all(20.0),
-                child: null,
+                child: TextField(
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
+                  decoration: InputDecoration(
+                    filled: true,
+                    fillColor: Colors.white,
+                    icon: Icon(Icons.location_city),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(16),
+                      ),
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                  onChanged: (text) => print(text),
+                ),
               ),
               FlatButton(
                 onPressed: () {},
